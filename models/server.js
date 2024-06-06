@@ -6,6 +6,10 @@ const cors = require('cors')
 
 const Sockets = require('./sockets')
 
+const corsOptions = {
+    origin: 'http://localhost:8081',
+}
+
 class Server {
     constructor(){
         this.app = express()
@@ -18,10 +22,10 @@ class Server {
     }
     //Metodos
     middlewares() {
-        //Configuracion CORS
-        this.app.use( cors() )
         //Desplegar el directorio publico
         this.app.use( express.static( path.resolve( __dirname, '../public')))
+        //Configuracion CORS
+        this.app.use( cors(corsOptions) )
     }
 
     configurarSockets() {
